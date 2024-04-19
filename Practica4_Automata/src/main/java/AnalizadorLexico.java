@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ public class AnalizadorLexico {
 
     /* El constructor dará valor a los atributos mediante los parámetros e inicializará el análisis léxico de la cadena,
      * es decir, no hay nada en el histórico y posActual = 0 */
-    public AnalizadorLexico(int[] cadena, AutomataFinito automata, Map<Integer, String> tokens) {
+    public AnalizadorLexico(int[] cadena, AutomataFinito automata, Map<Integer,String> tokens) {
         this.cadena = cadena;
         this.automata = automata;
         this.tokens = tokens;

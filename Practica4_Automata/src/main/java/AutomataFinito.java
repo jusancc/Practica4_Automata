@@ -2,7 +2,7 @@ public abstract class AutomataFinito {
     private int numEstados;
     private boolean[] finales;
     private int tamAlfabeto;
-    private int estActual;
+    protected int estActual;
 
     // Constructores
     protected AutomataFinito(int num, int alfabeto) {

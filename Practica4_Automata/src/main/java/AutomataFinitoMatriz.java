@@ -1,9 +1,4 @@
 public class AutomataFinitoMatriz extends AutomataFinito {
-
-    /* La transición se representa por una matriz. Las filas representan estados, las columnas letras.
-     * La entrada (i, j) de la matriz será el estado alcanzado desde el estado ”i” si se recibe la letra “j”.
-     * Podemos poner un -1 para indicar error, esto es, no existe esa transición.
-     */
     private int[][] matriz;
 
     public AutomataFinitoMatriz(int num, int alfabeto) {
@@ -22,14 +17,38 @@ public class AutomataFinitoMatriz extends AutomataFinito {
         if (estado >= 0 && estado < matriz.length && letra >= 0 && letra < matriz[0].length) {
             return matriz[estado][letra];
         } else {
-            return -1; // Por ejemplo, -1 indica error
+            return -1;
         }
     }
 
     // Implementación de la función de transición void
     @Override
     public void transicion(int letra) {
+        if (letra >= 0 && letra < matriz[0].length) {
+            this.estActual = matriz[this.estActual][letra];
+        } else {
+            System.out.println("Se ha producido un error");
+        }
+    }
 
+    @Override
+    public void cierreTransicion(int estado, int[] cadena) {
+        for (int letra : cadena) {
+            transicion(letra);
+        }
+    }
+
+    @Override
+    public boolean perteneceLenguaje(String cadena) {
+        int estadoActual = this.estActual;
+        for (char caracter : cadena.toCharArray()) {
+            int letra = caracter - 'a'; // Suponiendo que 'a' corresponde a 0, 'b' a 1, etc.
+            estadoActual = transicion(estadoActual, letra);
+            if (estadoActual == -1) {
+                return false; // La cadena no pertenece al lenguaje
+            }
+        }
+        return esEstadoFinal(estadoActual);
     }
 
 }
